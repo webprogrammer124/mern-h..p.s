@@ -1,0 +1,19 @@
+Service form
+ 1- Service form is created successfully. 
+But when we get its single list it shows error
+{Message: "Cannot read property 'ServiceDetails' of null"
+Success: false}
+
+All the payloads im sending are below.
+=========registeration======
+
+{"Header":{"TokenNo":"14","RegistrationDate":"2021-02-28T13:30:59.450Z","Name":"Noshan","FatherOrHusband":"Sid","DOB":"2021-02-28T13:30:59.450Z","Age":37,"Gender":"male","Religion":"islam","District":"asd","City":"khi","Area":"asd","HousNo":"asd2","Address":"asd2","CNIC":"42401 3568222 2","Phone":"","OffPhone":"","Mobile":"1212 1212121","RefBy":"ss","Remarks":"asd","IsRejected":false,"IsZakat":true,"IsPAFEmp":false,"MonthlyConsLimit":12,"ThumbImage":"","NOY":1,"EmpID":"21","IsStaff":true},"FormName":"Registration"}
+
+=========welfare======
+
+{"Header":{"MRNo":"MR-0000000014","TokenNo":"14","WelfareDate":"2021-02-28T13:32:08.986Z","Profession":"leader","Fiqa":"sunni","Education":"bachelors","Cast":"sidd","MonthlyIncome":122222,"Guardian":"guradia","OtherInfo":"other","MaleKids":0,"FemaleKids":1,"OtherKids":0,"Brothers":0,"Sisters":0,"NoOFFamilyMembers":2,"IsMarried":true,"IsAbleToPay":false,"IsEarning":false,"HaveGold":false,"ReqName":"req","ReqPhone":"1213 1231231","ReqRelationWithPatient":"self","CreateUser":"Admin","ModifyUser":"Admin"},"FormName":"Welfare","Detail":[{"MRNo":"MR-0000000014","MemberName":"noshan","RelationWithPatient":"self","MonthlyIncome":12222,"tableData":{"id":0}},{"MRNo":"MR-0000000014","MemberName":"wi","RelationWithPatient":"wife","MonthlyIncome":122,"tableData":{"id":1}}]}
+
+=======service========
+{"Header":{"MRNo":"MR-0000000015","TokenNo":"14","ServiceDate":"2021-02-28T14:19:32.164Z","Ward":"Ward# 2","Amount":1222,"TotalAmount":1222,"PatientContribution":"dd","Remarks":"dsad","CreatedUser":"Admin","ModifyUser":"Admin"},
+"FormName":"Service",
+"Detail":[{"TestDesc":"thyroid","TestCode":"001","TestRate":"1","tableData":{"id":0}}]}
