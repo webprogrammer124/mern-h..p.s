@@ -1,17 +1,41 @@
 const mongoose = require('mongoose');
 const serviceSchema = mongoose.Schema({
-    MRNo: "",
-    TokenNo: "",
-    ServiceDate: new Date(),
-    MRNo: 'recID',
-    Ward: "",
-    Amount: "",
-    TotalAmount: "",
-    PatientContribution: "",
-    Remarks: "",
-    CreatedUser: "Admin",
-    ModifyUser: "Admin"
-    
+        TokenNo: {
+            type: String, 
+            required:[true, "TokenNo is missing"] 
+        },
+        ServiceDate: {
+            type: Date,
+            default: new Date()
+        },
+        MRNo: {
+            type: String, 
+            required:[true, "MRNo is missing"] 
+        },
+        Ward: {
+            type: String, 
+            required:[true, "Ward is missing"] 
+        },
+        Amount: {
+            type: Number, 
+            required:[true, "Amount is missing"] 
+        },
+        TotalAmount: {
+            type: Number, 
+            required:[true, "TotalAmount is missing"] 
+        },
+        PatientContribution: {
+            type: String, 
+            required:[true, "PatientContribution is missing"] 
+        },
+        Remarks: {
+            type: String, 
+            required:[true, "Remarks is missing"] 
+        },
+        Remarks: {
+            type: String, 
+            required:[true, "Remarks is missing"] 
+        }
 })
-const Register = mongoose.model('service', serviceSchema)
+const Service = mongoose.model('Service', serviceSchema)
 module.exports = Service

@@ -101,11 +101,7 @@ const registerSchema = mongoose.Schema({
         IsStaff:{
             type: Boolean, 
             required:[true, "IsStaff is missing"] 
-        },
-        CreateUser: "",
-        ModifyUser: "",
-        CreateDate: "",
-        ModifyDate: "",
+        }
     
 })
 const Register = mongoose.model('Register', registerSchema)

@@ -12,6 +12,8 @@ import {
 } from '@material-ui/core';
 import GlobalHeader from '../GlobalHeader';
 import SubTable from './SubTable';
+import axios from 'axios'
+import Popup from '../Popup';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -25,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Welfare({next, back}) {
   const classes = useStyles();
+  const [ open, setOpen] = useState(false)
+  const [ err, setErr] = useState('')
+
   const [Header, setHeader] = useState({
     MRNo: 'recID',
     TokenNo: "",
@@ -53,13 +58,107 @@ export default function Welfare({next, back}) {
     ModifyUser: "Admin",
 });
 
-  const handleSubmit = () => {
-    console.log(Header);
-    next();
+const validate = () => {
+  if (Header.WelfareDate === '' || Header.WelfareDate === undefined || Header.WelfareDate === null) {
+    setErr('WelfareDate is missing')
+    setOpen(true)
+    return false;
   }
+  else if (Header.Profession === '' || Header.Profession === undefined || Header.Profession === null) {
+    setErr('Profession is missing')
+    return false;
+  }
+  else if (Header.Fiqa === '' || Header.Fiqa === undefined || Header.Fiqa === null) {
+    setErr('Fiqa is missing')
+    return false;
+  }
+  else if (Header.Education === '' || Header.Education === undefined || Header.Education === null) {
+    setErr('Education is missing')
+    return false;
+  }
+  else if (Header.Cast === '' || Header.Cast === undefined || Header.Cast === null) {
+    setErr('Cast is missing')
+    return false;
+  }
+  else if (Header.MonthlyIncome === '' || Header.MonthlyIncome === undefined || Header.MonthlyIncome === null) {
+    setErr('MonthlyIncome is missing')
+    return false;
+  }
+  else if (Header.Guardian === '' || Header.Guardian === undefined || Header.Guardian === null) {
+    setErr('Guardian is missing')
+    return false;
+  }
+  else if (Header.OtherInfo === '' || Header.OtherInfo === undefined || Header.OtherInfo === null) {
+    setErr('OtherInfo is missing')
+    return false;
+  }
+  else if (Header.MaleKids === '' || Header.MaleKids === undefined || Header.MaleKids === null) {
+    setErr('MaleKids is missing')
+    return false;
+  }
+  else if (Header.FemaleKids === '' || Header.FemaleKids === undefined || Header.FemaleKids === null) {
+    setErr('FemaleKids is missing')
+    return false;
+  }
+  else if (Header.OtherKids === '' || Header.OtherKids === undefined || Header.OtherKids === null) {
+    setErr('OtherKids is missing')
+    return false;
+  }
+  else if (Header.Brothers === '' || Header.Brothers === undefined || Header.Brothers === null) {
+    setErr('Brothers is missing')
+    return false;
+  }
+  else if (Header.NoOFFamilyMembers === '' || Header.NoOFFamilyMembers === undefined || Header.NoOFFamilyMembers === null) {
+    setErr('NoOFFamilyMembers is missing')
+    return false;
+  }
+  else if (Header.IsMarried === '' || Header.IsMarried === undefined || Header.IsMarried === null) {
+    setErr('IsMarried is missing')
+    return false;
+  }
+  else if (Header.IsAbleToPay === '' || Header.IsAbleToPay === undefined || Header.IsAbleToPay === null) {
+    setErr('IsAbleToPay is missing')
+    return false;
+  }
+  else if (Header.IsEarning === '' || Header.IsEarning === undefined || Header.IsEarning === null) {
+    setErr('IsEarning is missing')
+    return false;
+  }
+  else if (Header.HaveGold === '' || Header.HaveGold === undefined || Header.HaveGold === null) {
+    setErr('HaveGold is missing')
+    return false;
+  }
+  else if (Header.ReqName === '' || Header.ReqName === undefined || Header.ReqName === null) {
+    setErr('ReqName is missing')
+    return false;
+  }
+  else if (Header.ReqPhone === '' || Header.ReqPhone === undefined || Header.ReqPhone === null) {
+    setErr('ReqPhone is missing')
+    return false;
+  }
+  else if (Header.ReqRelationWithPatient === '' || Header.ReqRelationWithPatient === undefined || Header.ReqRelationWithPatient === null) {
+    setErr('ReqRelationWithPatient is missing')
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+const handleSubmit = () => {
+  const val=validate();
+  console.log(Header);
+  if ( val === true ) {
+    console.log("IN")
+    axios.post('http://localhost:4000/api/welfare/add', Header)
+    .then(res => next())
+    .catch(err => console.log(err, 'err'))
+  }
+}
 
   return (
     <div>
+      <Popup msg={err} open={open} handleClose={() => setOpen(false)}/>
       <GlobalHeader forward={handleSubmit} back={back} title="Welfare"/>
       <div style={{ padding: 16, margin: 'auto', maxWidth: '80%', justifyContent:'center' }}>
         <Grid container spacing={2}>
@@ -259,4 +358,5 @@ export default function Welfare({next, back}) {
     
   );
 }
+
 
