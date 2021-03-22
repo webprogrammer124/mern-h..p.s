@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const serviceSchema = mongoose.Schema({
         TokenNo: {
-            type: String, 
+            type: Number, 
             required:[true, "TokenNo is missing"] 
         },
         ServiceDate: {
@@ -9,7 +9,7 @@ const serviceSchema = mongoose.Schema({
             default: new Date()
         },
         MRNo: {
-            type: String, 
+            type: Number, 
             required:[true, "MRNo is missing"] 
         },
         Ward: {

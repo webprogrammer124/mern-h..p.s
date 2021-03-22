@@ -1,10 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import MaterialTable from 'material-table'
 import FormDialog from '../Dialog';
 import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
 const List = () => {
     const [open, setOpen] = React.useState(false);
-
+    const [data, setData] = React.useState([])
+    const [columns, setColumns] = React.useState([
+        { title: 'TokenNo', field: 'TokenNo' },
+        { title: 'Registeration Date', field: 'RegistrationDate' },
+        { title: 'MR No', field: 'MRNo' },
+        { title: 'Patient Name', field: 'Name', },
+        { title: 'Ref By', field: 'RefBy' },
+        { title: 'Age', field: 'Age', type: 'numeric' }
+    ]);
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -12,15 +23,35 @@ const List = () => {
     const handleClose = () => {
       setOpen(false);
     };
-    const [columns, setColumns] = React.useState([
-        { title: 'Adı', field: 'name' },
-        { title: 'Soyadı', field: 'surname' },
-        { title: 'Doğum Yılı', field: 'birthYear', type: 'numeric' },
-        { title: 'Doğum Yeri', field: 'birthCity', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } }
-    ]);
-    const [data, setData] = React.useState([
-        { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }
-    ])
+
+    useEffect(() => {
+        axios.get('http://localhost:4000/api/register')
+        .then((res) => {
+            console.log(res)
+            setData(res.data.data)
+        })
+
+    }, [])
+
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:4000/api/register/${data[id]._id}`)
+        .then(
+            (res) => {
+              console.log('Post was deleted successfully', res);
+              
+            })
+          .catch((err) => console.log(err));
+    }
+
+    // const handleedit = (id) => {
+    //     axios.get(`http://localhost:4000/api/register/${data[id]._id}`)
+    //     .then(
+    //         (res) => {
+    //             setOpen(true);
+    //         })
+    //       .catch((err) => console.log(err));
+    // }
+
     return (
         <div style={{ maxWidth: '90%', margin : 'auto' }}>
             <FormDialog open={open} handleClose={handleClose}/>
@@ -36,12 +67,12 @@ const List = () => {
                         onClick: handleClickOpen,
                     },
                     // {
-                    //     icon: AddIcon,
-                    //     tooltip: 'Add',
-                    //     onClick: handleClickOpen,
-                    // }
+                    //     icon: EditIcon,
+                    //     tooltip: 'edit',
+                    //     onClick: handleedit,
+                    // },
                   ]}
-                // editable={{
+                editable={{
                     // isEditable: rowData => rowData.name === 'a', // only name(a) rows would be editable
                     // isEditHidden: rowData => rowData.name === 'x',
                     // isDeletable: rowData => rowData.name === 'b', // only name(b) rows would be deletable,
@@ -64,29 +95,28 @@ const List = () => {
                     //             resolve();
                     //         }, 1000);
                     //     }),
-                    // onRowUpdate: (newData, oldData) =>
-                    //     new Promise((resolve, reject) => {
-                    //         setTimeout(() => {
-                    //             const dataUpdate = [...data];
-                    //             const index = oldData.tableData.id;
-                    //             dataUpdate[index] = newData;
-                    //             setData([...dataUpdate]);
-
-                    //             resolve();
-                    //         }, 1000);
-                    //     }),
-                    // onRowDelete: oldData =>
-                    //     new Promise((resolve, reject) => {
-                    //         setTimeout(() => {
-                    //             const dataDelete = [...data];
-                    //             const index = oldData.tableData.id;
-                    //             dataDelete.splice(index, 1);
-                    //             setData([...dataDelete]);
-
-                    //             resolve();
-                    //         }, 1000);
-                    //     })
-                // }}
+                    onRowUpdate: (newData, oldData) =>
+                        new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                const dataUpdate = [...data];
+                                const index = oldData.tableData.id;
+                                dataUpdate[index] = newData;
+                                setData([...dataUpdate]);
+                                resolve();
+                            }, 1000);
+                        }),
+                    onRowDelete: oldData =>
+                        new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                const dataDelete = [...data];
+                                const index = oldData.tableData.id;
+                                dataDelete.splice(index, 1);
+                                setData([...dataDelete]);
+                                handleDelete(oldData.tableData.id)
+                                resolve();
+                            }, 1000);
+                        })
+                }}
             />
         </div>
     )
