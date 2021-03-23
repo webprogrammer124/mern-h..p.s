@@ -1,0 +1,126 @@
+body{
+    background-color: rgb(60, 91, 92);
+}
+
+.parent{
+    display: flex;
+    justify-content: center;
+    border-radius: 5%;
+
+    
+
+    /* padding: 5%; */
+
+}
+.parent::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    background: url('./s.jpg') no-repeat center/cover ;
+    height: 30%;
+    width: 100%;
+    z-index: -1;
+    display: flex;
+    flex-wrap: wrap;
+    opacity: 1;
+
+}
+
+.fo{
+    position: relative;
+    top: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 20em;
+    text-align: center;
+    border-radius: 5%;
+
+    /* width: 50%; */
+
+}
+.fo input{
+    text-align: center;
+    font-family: monospace;
+    padding: 1.2%;
+    font-size: 1.2em;
+    height: 2em;
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+    margin-top: 2%;
+
+
+}
+.fo input:focus{
+    border: 2px solid black;
+}
+.fo h1{
+    color: white;
+    font-size: 3em;
+    font-family: monospace;
+}
+.btn{
+    display: flex;
+    flex-direction: row;
+    /* text-align: center; */
+    /* width: ; */
+    align-items: center;
+    justify-content: center;
+    /* flex-basis: 5em; */
+    height: 2em;
+    cursor: pointer;
+    font-family: monospace;
+    margin-top: 2em;
+    height: 30px;
+    background-color: rgb(43, 54, 53);
+   
+    color: wheat;
+    transition: all .5s ease;
+    border-radius: 10em;
+    width: 10em;
+    flex-basis: 50px;
+    font-family: monospace;
+
+    /* font-weight: bold; */
+
+}
+.btn a{
+    text-decoration: none;
+    /* color: white; */
+    /* color:black; */
+    color: wheat;
+   transition: all .5s ease;
+
+
+    /* background-color: rgb(43, 54, 53); */
+
+}
+.btn:hover{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    transition: all .5s ease;
+    align-items: center;
+    text-align: center;
+    /* background-color: rgb(15, 19, 61); */
+    background-color: rgb(28, 39, 38);
+
+    /* background-color: wheat; */
+    transform: scale(1.1);
+    /* color: black; */
+    
+    font-size: 1.1em;
+    font-family: monospace;
+    /* display: block; */
+    /* width: 50%; */
+    /* width: 6%; */
+
+}
+.btn a:hover{
+   font-family: monospace;
+   font-size: 1.1em;
+   padding: 4%;
+   transition: all .5s ease;
+   /* color: black; */
+    /* color: black; */
+}
